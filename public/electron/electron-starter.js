@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 // Module to control application life.
 // const app = electron.app
 
-// const { User } = require('../data/init-db');
+// const { User } = require('../data/init.db');
 
 const Sequelize = require('sequelize');
 // const sqlite3 = require('sqlite3').verbose();
@@ -16,13 +16,6 @@ const url = require('url')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
-/* 'database', 'username', 'password' */
-// const sequelize = new Sequelize('CryptoBeast', null, null, {
-//     dialect: 'sqlite',
-//     storage: '../DB/database.sqlite',
-//     operatorsAliases: false
-// });
-// const sequelize = new Sequelize('sqlite:/../DB/databaseTest.db')
 
 function createWindow() {
     // Create the browser window.
@@ -38,44 +31,6 @@ function createWindow() {
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
-
-
-    // test database
-    ipcMain.on('connect-db', function (event, data) {
-        console.log(data);
-
-        // force: true will drop the table if it already exists
-        const sequelize = new Sequelize('CryptoBeast', null, null, {
-            dialect: 'sqlite',
-            storage: '../../DB/database.sqlite',
-            operatorsAliases: false
-        });
-
-        const User = sequelize.define('user', {
-            firstName: {
-                type: Sequelize.STRING
-            },
-            lastName: {
-                type: Sequelize.STRING
-            }
-        });
-
-        User.sync({ force: true })
-            .then(() => {
-                // Table created
-                return User.create({
-                    firstName: 'John',
-                    lastName: 'Hancock'
-                });
-            });
-
-        const result = User.findAll()
-            .then(users => {
-                console.log(users)
-                mainWindow.webContents.send('db-result', users);
-            })
-    });
-
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {

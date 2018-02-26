@@ -15,6 +15,7 @@ const tryConnection = () => client.connect({ port: port }, () => {
         startedElectron = true;
         const exec = require('child_process').exec;
 
+        exec('npm run server');
         exec('npm run electron');
     }
 });

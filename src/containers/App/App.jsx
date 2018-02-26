@@ -19,8 +19,9 @@ import logo from "assets/img/reactlogo.png";
 // import { fetchDBData } from '../../data/main.db'
 // import { ipcRenderer, remote } from 'electron';
 // import { EventEmitter } from 'events';
-import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:3000');
+// import openSocket from 'socket.io-client';
+// const socket = openSocket('http://localhost:3000');
+import axios from 'axios';
 
 const switchRoutes = (
   <Switch>
@@ -33,8 +34,10 @@ const switchRoutes = (
 );
 
 class App extends React.Component {
+
   state = {
-    mobileOpen: false
+    mobileOpen: false,
+    username: ''
   };
 
   handleDrawerToggle = () => {
@@ -58,8 +61,15 @@ class App extends React.Component {
 
   handleClick() {
     console.log('handleClick');
-    socket.on("connect-db");
+    // socket.on("connect-db");
 
+    axios.get('http://localhost:3001/todos')
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
     // ipcRenderer.on("db-result", function (evt, result) {
     //   let list = [];
 
@@ -70,9 +80,9 @@ class App extends React.Component {
     // const { usersTest } = remote.require('./electron/data/users.data.js')
     // ipcRenderer.send('connect-db');
 
-    socket.on('db-result', (event, result) => {
-      console.log(result);
-    })
+    // socket.on('db-result', (event, result) => {
+    //   console.log(result);
+    // })
 
     // import('./moduleA')
   }
