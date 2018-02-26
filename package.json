@@ -1,26 +1,55 @@
 {
-    "name": "material-dashboard-react",
-    "version": "1.0.0",
-    "private": true,
-    "dependencies": {
-        "chartist": "^0.10.1",
-        "classnames": "^2.2.5",
-        "material-ui": "1.0.0-beta.30",
-        "material-ui-icons": "1.0.0-beta.17",
-        "npm-run-all": "^4.1.1",
-        "perfect-scrollbar": "^1.3.0",
-        "react": "^16.2.0",
-        "react-chartist": "^0.13.1",
-        "react-dom": "^16.2.0",
-        "react-google-maps": "^9.4.5",
-        "react-router-dom": "^4.2.2",
-        "react-scripts": "1.0.17",
-        "react-swipeable-views": "^0.12.12"
+  "name": "material-dashboard-react",
+  "description": "Material Dashboard ReactJS theme with Electron",
+  "author": "Motion Software",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "./",
+  "main": "electron/electron-starter.js",
+  "scripts": {
+    "start": "nf start -p 3000",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "electron-start": "node electron/electron-wait-react",
+    "react-start": "react-scripts start",
+    "pack": "build --dir",
+    "dist": "npm run build && build",
+    "postinstall": "install-app-deps"
+  },
+  "build": {
+    "appId": "com.electron.electron-with-create-react-app",
+    "win": {
+      "iconUrl": "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
     },
-    "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test --env=jsdom",
-        "eject": "react-scripts eject"
+    "directories": {
+      "buildResources": "assets"
     }
+  },
+  "dependencies": {
+    "chartist": "^0.10.1",
+    "classnames": "^2.2.5",
+    "material-ui": "1.0.0-beta.30",
+    "material-ui-icons": "1.0.0-beta.17",
+    "npm-run-all": "^4.1.1",
+    "perfect-scrollbar": "^1.3.0",
+    "react": "^16.2.0",
+    "react-chartist": "^0.13.1",
+    "react-dom": "^16.2.0",
+    "react-google-maps": "^9.4.5",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
+    "react-swipeable-views": "^0.12.12",
+    "sequelize": "^4.33.4",
+    "socket.io-client": "^2.0.4",
+    "sqlite": "^2.9.1",
+    "sqlite3": "^3.1.13"
+  },
+  "devDependencies": {
+    "electron": "^1.8.2",
+    "electron-builder": "^20.0.7",
+    "electron-packager": "^11.0.1",
+    "foreman": "^2.0.0"
+  }
 }

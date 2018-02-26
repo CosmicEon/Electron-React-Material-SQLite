@@ -15,6 +15,13 @@ import appStyle from "variables/styles/appStyle.jsx";
 import image from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/reactlogo.png";
 
+// test db
+// import { fetchDBData } from '../../data/main.db'
+// import { ipcRenderer, remote } from 'electron';
+// import { EventEmitter } from 'events';
+import openSocket from 'socket.io-client';
+const socket = openSocket('http://localhost:3000');
+
 const switchRoutes = (
   <Switch>
     {appRoutes.map((prop, key) => {
@@ -29,21 +36,47 @@ class App extends React.Component {
   state = {
     mobileOpen: false
   };
+
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
+
   getRoute() {
     return this.props.location.pathname !== "/maps";
   }
+
   componentDidMount() {
-    if(navigator.platform.indexOf('Win') > -1){
+    if (navigator.platform.indexOf('Win') > -1) {
       // eslint-disable-next-line
       const ps = new PerfectScrollbar(this.refs.mainPanel);
     }
   }
+
   componentDidUpdate() {
     this.refs.mainPanel.scrollTop = 0;
   }
+
+  handleClick() {
+    console.log('handleClick');
+    socket.on("connect-db");
+
+    // ipcRenderer.on("db-result", function (evt, result) {
+    //   let list = [];
+
+    //   for (var i = 0; i < result.length; i++) {
+    //     list.push(result[i].FirstName.toString());
+    //   }
+    // });
+    // const { usersTest } = remote.require('./electron/data/users.data.js')
+    // ipcRenderer.send('connect-db');
+
+    socket.on('db-result', (event, result) => {
+      console.log(result);
+    })
+
+    // import('./moduleA')
+  }
+
   render() {
     const { classes, ...rest } = this.props;
     return (
@@ -64,14 +97,18 @@ class App extends React.Component {
             handleDrawerToggle={this.handleDrawerToggle}
             {...rest}
           />
+
+          {/* test button */}
+          <button onClick={this.handleClick()}>Test</button>
+
           {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
           {this.getRoute() ? (
             <div className={classes.content}>
               <div className={classes.container}>{switchRoutes}</div>
             </div>
           ) : (
-            <div className={classes.map}>{switchRoutes}</div>
-          )}
+              <div className={classes.map}>{switchRoutes}</div>
+            )}
           {this.getRoute() ? <Footer /> : null}
         </div>
       </div>
