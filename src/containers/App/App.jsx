@@ -59,11 +59,11 @@ class App extends React.Component {
     this.refs.mainPanel.scrollTop = 0;
   }
 
-  handleClick() {
+  getTodos() {
     console.log('handleClick');
     // socket.on("connect-db");
 
-    axios.get('http://localhost:3001/todos')
+    axios.get('http://localhost:3200/todos')
       .then((response) => {
         console.log(response);
       })
@@ -109,7 +109,7 @@ class App extends React.Component {
           />
 
           {/* test button */}
-          <button onClick={this.handleClick()}>Test</button>
+          <button onClick={this.getTodos()}>Get Todos</button>
 
           {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
           {this.getRoute() ? (

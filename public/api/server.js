@@ -3,14 +3,14 @@ var bodyParser = require('body-parser');
 var db = require('./db.js');
 
 var app = express();
-var PORT = process.env.PORT || 3001;
+// var PORT = process.env.PORT || 3010;
+var PORT = 3200;
 var todos = [];
 var todoNextId = 1;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const allowedOrigins = [ 'http://localhost:3000', 'http://localhost:3000/dashboard',]
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Origin', '*');
