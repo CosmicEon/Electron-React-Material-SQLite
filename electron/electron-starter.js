@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 // Module to control application life.
 // const app = electron.app
 
-// const { User } = require('../data/init.db');
+// const seedDB = require('./data/seed.database');
 
 const Sequelize = require('sequelize');
 // const sqlite3 = require('sqlite3').verbose();
@@ -32,6 +32,18 @@ function createWindow() {
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
 
+    // Test DB
+    ipcMain.on("triggerCall", function (input) {
+        console.log(input);
+
+        // seedDB();
+
+        // handle the request
+        mainWindow.webContents.send("resultSent", 'test back');
+    });
+
+    mainWindow.webContents.on('crashed', function (error) { console.log(error) });
+
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
         // Dereference the window object, usually you would store windows
@@ -45,6 +57,10 @@ function createWindow() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
+
+app.on('unresponsive', function (error) { console.log(error) });
+
+app.on('uncaughtException', function (error) { console.log(error) });
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {

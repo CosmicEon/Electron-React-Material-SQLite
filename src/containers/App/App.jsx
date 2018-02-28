@@ -16,13 +16,9 @@ import image from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/reactlogo.png";
 
 // test db
-// import { fetchDBData } from '../../data/main.db'
-// import { ipcRenderer, remote } from 'electron';
-// import { EventEmitter } from 'events';
-// import openSocket from 'socket.io-client';
-// const socket = openSocket('http://localhost:3000');
+// import axios from 'axios';
+const ipcRenderer = window.require('electron').ipcRenderer;
 
-import axios from 'axios';
 
 const switchRoutes = (
   <Switch>
@@ -60,37 +56,10 @@ class App extends React.Component {
     this.refs.mainPanel.scrollTop = 0;
   }
 
-  getTodosSQLite() {
-    console.log('getTodosSQLite');
-    // socket.on("connect-db");
+  handleClick() {
+    console.log('handleClick', ipcRenderer);
 
-    axios.get('http://localhost:3200/todos')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-    // ipcRenderer.on("db-result", function (evt, result) {
-    //   let list = [];
-
-    //   for (var i = 0; i < result.length; i++) {
-    //     list.push(result[i].FirstName.toString());
-    //   }
-    // });
-    // const { usersTest } = remote.require('./electron/data/users.data.js')
-    // ipcRenderer.send('connect-db');
-
-    // socket.on('db-result', (event, result) => {
-    //   console.log(result);
-    // })
-
-    // import('./moduleA')
-  }
-  getTodosGraphQL() {
-    console.log('getTodosGraphQL');
-    // socket.on("connect-db");
-
+    // HTTP call to api
     // axios.get('http://localhost:3200/todos')
     //   .then((response) => {
     //     console.log(response);
@@ -98,21 +67,14 @@ class App extends React.Component {
     //   .catch((error) => {
     //     console.log(error);
     //   })
-    // ipcRenderer.on("db-result", function (evt, result) {
-    //   let list = [];
 
-    //   for (var i = 0; i < result.length; i++) {
-    //     list.push(result[i].FirstName.toString());
-    //   }
-    // });
-    // const { usersTest } = remote.require('./electron/data/users.data.js')
-    // ipcRenderer.send('connect-db');
+    // trigger call to electron
+    ipcRenderer.send("triggerCall");
 
-    // socket.on('db-result', (event, result) => {
-    //   console.log(result);
-    // })
-
-    // import('./moduleA')
+    // listen for callback from electron
+    ipcRenderer.on("resultSent", function (evt, result) {
+      console.log(result);
+    });
   }
 
   render() {
@@ -137,10 +99,7 @@ class App extends React.Component {
           />
 
           {/* test button */}
-          <button onClick={this.getTodosSQLite()}>Get Todos from SQLite</button>
-
-          {/* test button */}
-          <button onClick={this.getTodosGraphQL()}>Get Todos from GraphQL</button>
+          <button onClick={this.handleClick()}>Get Request</button>
 
           {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
           {this.getRoute() ? (

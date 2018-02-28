@@ -1,3 +1,5 @@
+require('devtron').install()
+
 # [Material Dashboard React - Free Material-UI Design Admin](https://creativetimofficial.github.io/material-dashboard-react/)
 [![version][version-badge]][CHANGELOG] [![license][license-badge]][LICENSE]
 

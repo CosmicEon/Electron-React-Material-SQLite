@@ -15,6 +15,7 @@
     "electron": "electron .",
     "electron-start": "node electron/electron-wait-react",
     "react-start": "react-scripts start",
+    "rebuild": "electron-rebuild -f -w sqlite3",
     "pack": "build --dir",
     "dist": "npm run build && build",
     "postinstall": "install-app-deps"
@@ -48,12 +49,14 @@
     "sequelize": "^4.33.4",
     "socket.io-client": "^2.0.4",
     "sqlite": "^2.9.1",
-    "sqlite3": "^3.1.13"
+    "sqlite3": "https://github.com/mapbox/node-sqlite3/tarball/master"
   },
   "devDependencies": {
+    "devtron": "^1.4.0",
     "electron": "^1.8.2",
     "electron-builder": "^20.0.7",
     "electron-packager": "^11.0.1",
+    "electron-rebuild": "^1.7.3",
     "foreman": "^2.0.0",
     "node-pre-gyp": "^0.6.39"
   }
