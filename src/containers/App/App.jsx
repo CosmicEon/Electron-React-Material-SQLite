@@ -21,6 +21,7 @@ import logo from "assets/img/reactlogo.png";
 // import { EventEmitter } from 'events';
 // import openSocket from 'socket.io-client';
 // const socket = openSocket('http://localhost:3000');
+
 import axios from 'axios';
 
 const switchRoutes = (
@@ -59,8 +60,8 @@ class App extends React.Component {
     this.refs.mainPanel.scrollTop = 0;
   }
 
-  getTodos() {
-    console.log('handleClick');
+  getTodosSQLite() {
+    console.log('getTodosSQLite');
     // socket.on("connect-db");
 
     axios.get('http://localhost:3200/todos')
@@ -70,6 +71,33 @@ class App extends React.Component {
       .catch((error) => {
         console.log(error);
       })
+    // ipcRenderer.on("db-result", function (evt, result) {
+    //   let list = [];
+
+    //   for (var i = 0; i < result.length; i++) {
+    //     list.push(result[i].FirstName.toString());
+    //   }
+    // });
+    // const { usersTest } = remote.require('./electron/data/users.data.js')
+    // ipcRenderer.send('connect-db');
+
+    // socket.on('db-result', (event, result) => {
+    //   console.log(result);
+    // })
+
+    // import('./moduleA')
+  }
+  getTodosGraphQL() {
+    console.log('getTodosGraphQL');
+    // socket.on("connect-db");
+
+    // axios.get('http://localhost:3200/todos')
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
     // ipcRenderer.on("db-result", function (evt, result) {
     //   let list = [];
 
@@ -109,7 +137,10 @@ class App extends React.Component {
           />
 
           {/* test button */}
-          <button onClick={this.getTodos()}>Get Todos</button>
+          <button onClick={this.getTodosSQLite()}>Get Todos from SQLite</button>
+
+          {/* test button */}
+          <button onClick={this.getTodosGraphQL()}>Get Todos from GraphQL</button>
 
           {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
           {this.getRoute() ? (

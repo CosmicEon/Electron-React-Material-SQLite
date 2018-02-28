@@ -22,7 +22,7 @@ app.get('/', function (req, res) {
     res.send('ToDo API Root');
 });
 
-//GET requests /toos?completed=true
+//GET requests /todos?completed=true
 app.get('/todos', function (req, res) {
     var query = req.query;
     var where = {};

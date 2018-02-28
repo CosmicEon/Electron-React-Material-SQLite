@@ -3,7 +3,7 @@ const path = require('path');
 
 var sequelize = new Sequelize('CryptoBeast', null, null, {
     dialect: 'sqlite',
-    storage: path.join(__dirname, '..', '..', 'DB', 'CryptoBeast.db')
+    storage: path.join(__dirname, '..', 'DB', 'CryptoBeast.sqlite')
 });
 
 var db = {};
