@@ -4,7 +4,8 @@ const path = require('path');
 
 const db = new Sequelize('shoppingCart', null, null, {
   dialect: 'sqlite',
-  storage: path.join(__dirname, '..', '..', 'DB', 'CryptoBeast.sqlite')
+  storage: path.join(__dirname, '..', '..', 'DB', 'CryptoBeast.sqlite'),
+  operatorsAliases: false
 });
 
 const Product = db.define('products', {
@@ -34,7 +35,7 @@ const CartProduct = db.define('carts', {
 
 db.sync({}); // executes db.define
 
-function getProducts() { return Product.findAll(); } // end of the function getProducts
+function getProducts() { return Product.findAll() } // end of the function getProducts
 
 // definition of the function addToProducts
 function addToProducts(product) {

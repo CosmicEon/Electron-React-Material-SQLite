@@ -15,10 +15,10 @@
     "electron": "electron .",
     "electron-start": "node electron/electron-wait-react",
     "react-start": "react-scripts start",
-    "rebuild": "electron-rebuild -f -w sqlite3",
     "pack": "build --dir",
     "dist": "npm run build && build",
-    "postinstall": "install-app-deps"
+    "rebuild-sqlite3": "electron-rebuild -f -w sqlite3",
+    "postinstall": "electron-builder install-app-deps"
   },
   "build": {
     "appId": "com.electron.electron-with-create-react-app",
@@ -39,6 +39,7 @@
     "material-ui-icons": "1.0.0-beta.17",
     "npm-run-all": "^4.1.1",
     "perfect-scrollbar": "^1.3.0",
+    "postinstall": "0.0.1",
     "react": "^16.2.0",
     "react-chartist": "^0.13.1",
     "react-dom": "^16.2.0",
@@ -47,7 +48,6 @@
     "react-scripts": "1.0.17",
     "react-swipeable-views": "^0.12.12",
     "sequelize": "^4.33.4",
-    "socket.io-client": "^2.0.4",
     "sqlite": "^2.9.1",
     "sqlite3": "https://github.com/mapbox/node-sqlite3/tarball/master"
   },

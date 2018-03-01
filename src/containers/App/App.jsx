@@ -15,10 +15,6 @@ import appStyle from "variables/styles/appStyle.jsx";
 import image from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/reactlogo.png";
 
-// test db
-// import axios from 'axios';
-const ipcRenderer = window.require('electron').ipcRenderer;
-
 
 const switchRoutes = (
   <Switch>
@@ -56,27 +52,6 @@ class App extends React.Component {
     this.refs.mainPanel.scrollTop = 0;
   }
 
-  handleClick() {
-    console.log('handleClick', ipcRenderer);
-
-    // HTTP call to api
-    // axios.get('http://localhost:3200/todos')
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   })
-
-    // trigger call to electron
-    ipcRenderer.send("triggerCall");
-
-    // listen for callback from electron
-    ipcRenderer.on("resultSent", function (evt, result) {
-      console.log(result);
-    });
-  }
-
   render() {
     const { classes, ...rest } = this.props;
     return (
@@ -96,11 +71,7 @@ class App extends React.Component {
             routes={appRoutes}
             handleDrawerToggle={this.handleDrawerToggle}
             {...rest}
-          />
-
-          {/* test button */}
-          <button onClick={this.handleClick()}>Get Request</button>
-
+          />s
           {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
           {this.getRoute() ? (
             <div className={classes.content}>

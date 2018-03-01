@@ -33,6 +33,10 @@ import {
 
 import dashboardStyle from "variables/styles/dashboardStyle";
 
+// test db
+// import axios from 'axios';
+const ipcRenderer = window.require('electron').ipcRenderer;
+
 class Dashboard extends React.Component {
   state = {
     value: 0
@@ -44,17 +48,57 @@ class Dashboard extends React.Component {
   handleChangeIndex = index => {
     this.setState({ value: index });
   };
+
+  handleClick() {
+    console.log('handleClick', ipcRenderer);
+
+    // HTTP call to api
+    // axios.get('http://localhost:3200/todos')
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
+
+    // trigger call to electron
+    ipcRenderer.send('getProductsCall');
+
+    // listen for callback from electron
+    ipcRenderer.on('getProductsReturn', function (event, result) {
+      console.log('getProductsReturn', event);
+      console.log('getProductsReturn', result);
+    });
+  }
+
   render() {
     return (
       <div>
         <Grid container>
+
+          {/* this is test for DB */}
+          <ItemGrid xs={12} sm={6} md={3}>
+            <StatsCard
+              onClick={this.handleClick()}
+              icon={ContentCopy}
+              iconColor="orange"
+              title="SQLite"
+              description="Test DB"
+              // small="GB"
+              statIcon={Warning}
+              statIconColor="danger"
+              statLink={{ text: "Test DB", href: "#pablo" }}
+            />
+          </ItemGrid>
+          {/* this is test for DB */}
+
           <ItemGrid xs={12} sm={6} md={3}>
             <StatsCard
               icon={ContentCopy}
               iconColor="orange"
               title="Used Space"
               description="49/50"
-              small="GB"
+              small="3"
               statIcon={Warning}
               statIconColor="danger"
               statLink={{ text: "Get More Space...", href: "#pablo" }}

@@ -1,12 +1,11 @@
 const Sequelize = require('sequelize');
 const path = require('path');
-// const sqlite = require('sqlite');
-// const sqlite3 = require('sqlite3');
 
 
 const db = new Sequelize('shoppingCart', null, null, {
   dialect: 'sqlite',
-  storage: path.join(__dirname, '..', '..', 'DB', 'CryptoBeast.sqlite')
+  storage: path.join(__dirname, '..', '..', 'DB', 'CryptoBeast.sqlite'),
+  operatorsAliases: false
 });
 
 const Product = db.define('products', {
@@ -74,7 +73,6 @@ const products = [
     quantity: 1,
   }
 ];
-
 Product.bulkCreate(products); // creating bulk products
 
 function initDB() {

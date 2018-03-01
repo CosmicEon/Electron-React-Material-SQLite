@@ -1,11 +1,8 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron');
 // Module to control application life.
 // const app = electron.app
 
-// const seedDB = require('./data/seed.database');
-
-const Sequelize = require('sequelize');
-// const sqlite3 = require('sqlite3').verbose();
+const dataController = require('./data/data-controller');
 
 // Module to create native browser window.
 // const BrowserWindow = electron.BrowserWindow
@@ -33,13 +30,14 @@ function createWindow() {
     mainWindow.webContents.openDevTools()
 
     // Test DB
-    ipcMain.on("triggerCall", function (input) {
-        console.log(input);
-
-        // seedDB();
+    ipcMain.on('getProductsCall', function (event, args) {
+        console.log(event);
 
         // handle the request
-        mainWindow.webContents.send("resultSent", 'test back');
+        dataController.getProducts()
+            .then((results) => {
+                mainWindow.webContents.send('getProductsReturn', JSON.stringify(results));
+            });
     });
 
     mainWindow.webContents.on('crashed', function (error) { console.log(error) });
