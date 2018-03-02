@@ -93,12 +93,12 @@ class Dashboard extends React.Component {
     });
   }
 
-  handleChange = (event) => {
-    // if (event.key === 'Enter') {
-    //   console.log('do validate');
-    //   this.setState({ inputName: event.target.value });
-    // }
-  }
+  // handleChange = (event) => {
+  //   if (event.key === 'Enter') {
+  //     console.log('do validate');
+  //     this.setState({ inputName: event.target.value });
+  //   }
+  // }
 
   render() {
     return (
