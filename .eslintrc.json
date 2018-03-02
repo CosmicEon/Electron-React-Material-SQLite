@@ -20,13 +20,19 @@
         "no-unused-vars": "warn",
         "constructor-super": "warn",
         "valid-typeof": "warn",
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": true
+            }
+        ],
         "quotes": [
             2,
             "single"
         ],
         "semi": [
             "error",
-            "never"
+            "always"
         ]
     },
     "parser": "babel-eslint",

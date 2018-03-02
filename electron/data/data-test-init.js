@@ -5,18 +5,18 @@ const path = require('path');
 const db = new Sequelize('shoppingCart', null, null, {
   dialect: 'sqlite',
   storage: path.join(__dirname, '..', '..', 'DB', 'CryptoBeast.sqlite'),
-  operatorsAliases: false
+  operatorsAliases: false,
 });
 
 const Product = db.define('products', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   name: Sequelize.STRING,
   price: Sequelize.INTEGER,
-  quantity: Sequelize.INTEGER
+  quantity: Sequelize.INTEGER,
 }); // used to define the Table Product
 
 db.sync({}); // executes db.define
@@ -71,7 +71,7 @@ const products = [
     name: 'Sony Xperia X Dual',
     price: 43000,
     quantity: 1,
-  }
+  },
 ];
 Product.bulkCreate(products); // creating bulk products
 

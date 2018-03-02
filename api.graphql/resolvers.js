@@ -1,5 +1,5 @@
-// import { Member, Group, Card, Workspace } from "./connectors";
-import { Member, Card, Workspace } from "./connectors";
+// import { Member, Group, Card, Workspace } from './connectors';
+import { Member, Card, Workspace } from './connectors';
 
 const resolvers = {
   Query: {
@@ -38,17 +38,17 @@ const resolvers = {
     },
     workspace(root, args) {
       return Workspace.find({ where: args });
-    }
+    },
   },
   Mutation: {
     deleteCard(root, args) {
       const card = Card.find({ where: args });
       const res = Card.destroy({ where: args });
       if (res) {
-        console.log("res", res);
+        console.log('res', res);
       }
       return card;
-    }
+    },
   },
   Member: {
     // groups(member) {
@@ -62,7 +62,7 @@ const resolvers = {
     },
     workspaces(member) {
       return member.getWorkspaces();
-    }
+    },
   },
   // Group: {
   //   members(group) {
@@ -75,7 +75,7 @@ const resolvers = {
   Card: {
     workspace(card) {
       return card.getWorkspace();
-    }
+    },
   },
   Workspace: {
     cards(workspace) {
@@ -83,11 +83,11 @@ const resolvers = {
     },
     members(workspace) {
       return workspace.getMembers();
-    }
+    },
     // groups(workspace) {
     //   return workspace.getGroups();
     // }
-  }
+  },
 };
 
 export default resolvers;

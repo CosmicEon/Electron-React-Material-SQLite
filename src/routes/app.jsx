@@ -1,10 +1,10 @@
-import DashboardPage from "views/Dashboard/Dashboard.jsx";
-import UserProfile from "views/UserProfile/UserProfile.jsx";
-import TableList from "views/TableList/TableList.jsx";
-import Typography from "views/Typography/Typography.jsx";
-import Icons from "views/Icons/Icons.jsx";
-import Maps from "views/Maps/Maps.jsx";
-import NotificationsPage from "views/Notifications/Notifications.jsx";
+import DashboardPage from 'views/Dashboard/Dashboard.jsx';
+import UserProfile from 'views/UserProfile/UserProfile.jsx';
+import TableList from 'views/TableList/TableList.jsx';
+import Typography from 'views/Typography/Typography.jsx';
+import Icons from 'views/Icons/Icons.jsx';
+import Maps from 'views/Maps/Maps.jsx';
+import NotificationsPage from 'views/Notifications/Notifications.jsx';
 
 import {
   Dashboard,
@@ -13,60 +13,62 @@ import {
   LibraryBooks,
   BubbleChart,
   LocationOn,
-  Notifications
-} from "material-ui-icons";
+  Notifications,
+} from 'material-ui-icons';
 
 const appRoutes = [
   {
-    path: "/dashboard",
-    sidebarName: "Dashboard",
-    navbarName: "Material Dashboard",
+    path: '/dashboard',
+    sidebarName: 'Dashboard',
+    navbarName: 'Material Dashboard',
     icon: Dashboard,
-    component: DashboardPage
+    component: DashboardPage,
   },
   {
-    path: "/user",
-    sidebarName: "User Profile",
-    navbarName: "Profile",
+    path: '/user',
+    sidebarName: 'User Profile',
+    navbarName: 'Profile',
     icon: Person,
-    component: UserProfile
+    component: UserProfile,
   },
   {
-    path: "/table",
-    sidebarName: "Table List",
-    navbarName: "Table List",
+    path: '/table',
+    sidebarName: 'Table List',
+    navbarName: 'Table List',
     icon: ContentPaste,
-    component: TableList
+    component: TableList,
   },
   {
-    path: "/typography",
-    sidebarName: "Typography",
-    navbarName: "Typography",
+    path: '/typography',
+    sidebarName: 'Typography',
+    navbarName: 'Typography',
     icon: LibraryBooks,
-    component: Typography
+    component: Typography,
   },
   {
-    path: "/icons",
-    sidebarName: "Icons",
-    navbarName: "Icons",
+    path: '/icons',
+    sidebarName: 'Icons',
+    navbarName: 'Icons',
     icon: BubbleChart,
-    component: Icons
+    component: Icons,
   },
   {
-    path: "/maps",
-    sidebarName: "Maps",
-    navbarName: "Map",
+    path: '/maps',
+    sidebarName: 'Maps',
+    navbarName: 'Map',
     icon: LocationOn,
-    component: Maps
+    component: Maps,
   },
   {
-    path: "/notifications",
-    sidebarName: "Notifications",
-    navbarName: "Notifications",
+    path: '/notifications',
+    sidebarName: 'Notifications',
+    navbarName: 'Notifications',
     icon: Notifications,
-    component: NotificationsPage
+    component: NotificationsPage,
   },
-  { redirect: true, path: "/", to: "/dashboard", navbarName: "Redirect" }
+  {
+    redirect: true, path: '/', to: '/dashboard', navbarName: 'Redirect',
+  },
 ];
 
 export default appRoutes;

@@ -8,6 +8,7 @@ import issuesJSON from '../data/issues.json';
 import employeesJSON from '../data/employees.json';
 import fs from 'fs';
 import path from 'path';
+
 const store = {};
 
 // Some helper methods to load CSV into JSON, which were removed for brevity's sake.

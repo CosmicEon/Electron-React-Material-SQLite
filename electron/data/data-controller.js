@@ -5,18 +5,18 @@ const path = require('path');
 const db = new Sequelize('shoppingCart', null, null, {
   dialect: 'sqlite',
   storage: path.join(__dirname, '..', '..', 'DB', 'CryptoBeast.sqlite'),
-  operatorsAliases: false
+  operatorsAliases: false,
 });
 
 const Product = db.define('products', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   name: Sequelize.STRING,
   price: Sequelize.INTEGER,
-  quantity: Sequelize.INTEGER
+  quantity: Sequelize.INTEGER,
 }); // used to define the Table Product
 
 db.sync({}); // executes db.define
@@ -25,17 +25,17 @@ const CartProduct = db.define('carts', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   name: Sequelize.STRING,
   price: Sequelize.INTEGER,
   quantity: Sequelize.INTEGER,
-  amount: Sequelize.INTEGER
+  amount: Sequelize.INTEGER,
 }); // used to define the Table
 
 db.sync({}); // executes db.define
 
-function getProducts() { return Product.findAll() } // end of the function getProducts
+function getProducts() { return Product.findAll(); } // end of the function getProducts
 
 // definition of the function addToProducts
 function addToProducts(product) {
@@ -52,9 +52,10 @@ function addToProducts(product) {
 // definition of the function addToCart
 function addToCart(product) {
   CartProduct.findById(product.id)
-    .then(cartItem => {
+    .then((cartItem) => {
       cartItem.increment('quantity', { by: product.quantity });
       cartItem.increment('amount', { by: product.amount });
+
       return cartItem;
     })
     .catch((error) => {
@@ -66,7 +67,7 @@ function addToCart(product) {
     name: product.name,
     price: product.price,
     quantity: product.quantity,
-    amount: product.amount
+    amount: product.amount,
   });
 } // end of the function addToCart
 
@@ -83,7 +84,7 @@ function getCart() {
 // definition of the function decrementCart
 function decrementCart(cartItemID) {
   CartProduct.findById(cartItemID)
-    .then(user => {
+    .then((user) => {
       user.decrement('quantity', { by: 1 });
       user.decrement('amount', { by: user.price });
     })
@@ -95,7 +96,7 @@ function decrementCart(cartItemID) {
 // definition of the function incrementCart
 function incrementCart(cartItemID) {
   CartProduct.findById(cartItemID)
-    .then(user => {
+    .then((user) => {
       user.increment('quantity', { by: 1 });
       user.increment('amount', { by: user.price });
     })
@@ -132,8 +133,8 @@ function delFromCart(cartItemID) {
   return CartProduct.destroy({
     where:
       {
-        id: cartItemID
-      }
+        id: cartItemID,
+      },
   });
 } // end of the function delFromCart
 
@@ -147,7 +148,7 @@ module.exports = {
   totalAmount,
   delFromCart,
   incrementCart,
-  decrementCart
+  decrementCart,
 };
 
 // all exported files

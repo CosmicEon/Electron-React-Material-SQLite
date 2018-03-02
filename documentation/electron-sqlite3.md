@@ -4,6 +4,8 @@ THIS
 
 npm install –global –production windows-build-tools
 
+npm install –global node-gyp
+
 PLUS THIS
 
 npm install electron-rebuild && node_modules.bin\electron-rebuild
