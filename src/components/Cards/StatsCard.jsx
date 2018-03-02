@@ -20,7 +20,9 @@ function StatsCard({ ...props }) {
     small,
     statText,
     statIconColor,
-    iconColor
+    iconColor,
+    getProducts,
+    addToProducts,
   } = props;
   return (
     <Card className={classes.card}>
@@ -47,7 +49,7 @@ function StatsCard({ ...props }) {
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <div className={classes.cardStats}>
+        <div className={classes.cardStats} onClick={getProducts}>
           <props.statIcon
             className={
               classes.cardStatsIcon +
@@ -56,7 +58,7 @@ function StatsCard({ ...props }) {
             }
           />{" "}
           {statLink !== undefined ? (
-            <a href={statLink.href} className={classes.cardStatsLink}>
+            <a href={statLink.href} className={classes.cardStatsLink} onClick={addToProducts}>
               {statLink.text}
             </a>
           ) : statText !== undefined ? (

@@ -1,10 +1,13 @@
+# Electron debug tool
+require('devtron').install()
+
 # Electron SQLite3 Integration
 ## Method 1
 THIS
 
-npm install –global –production windows-build-tools
+npm install -g windows-build-tools
 
-npm install –global node-gyp
+npm install –g node-gyp
 
 PLUS THIS
 

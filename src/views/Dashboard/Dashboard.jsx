@@ -39,18 +39,19 @@ const ipcRenderer = window.require('electron').ipcRenderer;
 
 class Dashboard extends React.Component {
   state = {
-    value: 0
+    value: 0,
+    // inputName: '',
   };
   handleChange = (event, value) => {
     this.setState({ value });
   };
 
-  handleChangeIndex = index => {
+  handleChangeIndex = (index) => {
     this.setState({ value: index });
   };
 
-  handleClick() {
-    console.log('handleClick', ipcRenderer);
+  getProductsHandler = () => {
+    console.log('getProductsHandler', ipcRenderer);
 
     // HTTP call to api
     // axios.get('http://localhost:3200/todos')
@@ -65,10 +66,38 @@ class Dashboard extends React.Component {
     ipcRenderer.send('getProductsCall');
 
     // listen for callback from electron
-    ipcRenderer.on('getProductsReturn', function (event, result) {
+    ipcRenderer.on('getProductsReturn', (event, result) => {
       console.log('getProductsReturn', event);
       console.log('getProductsReturn', result);
     });
+  }
+
+  addToProductsHandler = () => {
+    console.log('addToProductsHandler', ipcRenderer);
+
+    // trigger call to electron
+    const price = ((Math.random() * 999) + 1).toFixed(0);
+    const name = 'Huawei P10 ';
+    const objectToSave = {
+      name,
+      price,
+    };
+    console.log(objectToSave);
+    console.log(this.state.inputName);
+    ipcRenderer.send('addToProductsCall', objectToSave);
+
+    // listen for callback from electron
+    ipcRenderer.on('addToProductsReturn', (event, result) => {
+      console.log('addToProductsReturn', event);
+      console.log('addToProductsReturn', result);
+    });
+  }
+
+  handleChange = (event) => {
+    // if (event.key === 'Enter') {
+    //   console.log('do validate');
+    //   this.setState({ inputName: event.target.value });
+    // }
   }
 
   render() {
@@ -79,16 +108,34 @@ class Dashboard extends React.Component {
           {/* this is test for DB */}
           <ItemGrid xs={12} sm={6} md={3}>
             <StatsCard
-              onClick={this.handleClick()}
+              getProducts={this.getProductsHandler}
               icon={ContentCopy}
               iconColor="orange"
               title="SQLite"
-              description="Test DB"
+              description="GET"
               // small="GB"
               statIcon={Warning}
               statIconColor="danger"
               statLink={{ text: "Test DB", href: "#pablo" }}
             />
+          </ItemGrid>
+          {/* this is test for DB */}
+
+          {/* this is test for DB */}
+          <ItemGrid xs={12} sm={6} md={3}>
+            <StatsCard
+              addToProducts={this.addToProductsHandler}
+              icon={ContentCopy}
+              iconColor="orange"
+              title="SQLite"
+              description="POST"
+              // small="GB"
+              statIcon={Warning}
+              statIconColor="danger"
+              statLink={{ text: "Test DB", href: "#pablo" }}
+            />
+            <input type="text" onKeyPress={this.handleChange()} />
+
           </ItemGrid>
           {/* this is test for DB */}
 

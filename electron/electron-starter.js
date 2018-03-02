@@ -40,6 +40,17 @@ function createWindow() {
       });
   });
 
+  ipcMain.on('addToProductsCall', (event, args) => {
+    console.log(event);
+    const itemToAdd = args;
+
+    // handle the request
+    dataController.addToProducts(itemToAdd)
+      .then(() => {
+        mainWindow.webContents.send('addToProductsReturn', 'done');
+      });
+  });
+
   mainWindow.webContents.on('crashed', (error) => { console.log(error); });
 
   // Emitted when the window is closed.
