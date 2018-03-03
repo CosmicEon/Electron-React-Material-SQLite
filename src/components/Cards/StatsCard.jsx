@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 import {
   withStyles,
   Card,
   CardContent,
   CardHeader,
   CardActions,
-  Typography
-} from "material-ui";
-import PropTypes from "prop-types";
+  Typography,
+} from 'material-ui';
+import PropTypes from 'prop-types';
 
-import statsCardStyle from "variables/styles/statsCardStyle";
+import statsCardStyle from 'variables/styles/statsCardStyle';
 
 function StatsCard({ ...props }) {
   const {
@@ -24,12 +24,13 @@ function StatsCard({ ...props }) {
     getProducts,
     addToProducts,
   } = props;
+
   return (
     <Card className={classes.card}>
       <CardHeader
         classes={{
-          root: classes.cardHeader + " " + classes[iconColor + "CardHeader"],
-          avatar: classes.cardAvatar
+          root: `${classes.cardHeader} ${classes[iconColor + "CardHeader"]}`,
+          avatar: classes.cardAvatar,
         }}
         avatar={<props.icon className={classes.cardIcon} />}
       />
@@ -42,7 +43,7 @@ function StatsCard({ ...props }) {
           component="h2"
           className={classes.cardTitle}
         >
-          {description}{" "}
+          {description}{' '}
           {small !== undefined ? (
             <small className={classes.cardTitleSmall}>{small}</small>
           ) : null}
@@ -52,11 +53,9 @@ function StatsCard({ ...props }) {
         <div className={classes.cardStats} onClick={getProducts}>
           <props.statIcon
             className={
-              classes.cardStatsIcon +
-              " " +
-              classes[statIconColor + "CardStatsIcon"]
+              `${classes.cardStatsIcon} ${classes[statIconColor + "CardStatsIcon"]}`
             }
-          />{" "}
+          />{' '}
           {statLink !== undefined ? (
             <a href={statLink.href} className={classes.cardStatsLink} onClick={addToProducts}>
               {statLink.text}
@@ -71,29 +70,29 @@ function StatsCard({ ...props }) {
 }
 
 StatsCard.defaultProps = {
-  iconColor: "purple",
-  statIconColor: "gray"
+  iconColor: 'purple',
+  statIconColor: 'gray',
 };
 
 StatsCard.propTypes = {
   classes: PropTypes.object.isRequired,
   icon: PropTypes.func.isRequired,
-  iconColor: PropTypes.oneOf(["orange", "green", "red", "blue", "purple"]),
+  iconColor: PropTypes.oneOf(['orange', 'green', 'red', 'blue', 'purple']),
   title: PropTypes.node,
   description: PropTypes.node,
   small: PropTypes.node,
   statIcon: PropTypes.func.isRequired,
   statIconColor: PropTypes.oneOf([
-    "warning",
-    "primary",
-    "danger",
-    "success",
-    "info",
-    "rose",
-    "gray"
+    'warning',
+    'primary',
+    'danger',
+    'success',
+    'info',
+    'rose',
+    'gray',
   ]),
   statLink: PropTypes.object,
-  statText: PropTypes.node
+  statText: PropTypes.node,
 };
 
 export default withStyles(statsCardStyle)(StatsCard);

@@ -9,7 +9,7 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
 } from "material-ui";
 
 import { HeaderLinks } from "components";
@@ -22,15 +22,15 @@ const Sidebar = ({ ...props }) => {
     return props.location.pathname.indexOf(routeName) > -1 ? true : false;
   }
   const { classes, color, logo, image, logoText, routes } = props;
-  var links = (
+  const links = (
     <List className={classes.list}>
       {routes.map((prop, key) => {
         if (prop.redirect) return null;
         const listItemClasses = cx({
-          [" " + classes[color]]: activeRoute(prop.path)
+          [" " + classes[color]]: activeRoute(prop.path),
         });
         const whiteFontClasses = cx({
-          [" " + classes.whiteFont]: activeRoute(prop.path)
+          [" " + classes.whiteFont]: activeRoute(prop.path),
         });
         return (
           <NavLink
@@ -54,9 +54,10 @@ const Sidebar = ({ ...props }) => {
       })}
     </List>
   );
-  var brand = (
+  const brand = (
     <div className={classes.logo}>
-      <a href="https://www.creative-tim.com" className={classes.logoLink}>
+      <a href="#" className={classes.logoLink}>
+        {/* <a href="https://www.creative-tim.com" className={classes.logoLink}> */}
         <div className={classes.logoImage}>
           <img src={logo} alt="logo" className={classes.img} />
         </div>
@@ -72,11 +73,11 @@ const Sidebar = ({ ...props }) => {
           anchor="right"
           open={props.open}
           classes={{
-            paper: classes.drawerPaper
+            paper: classes.drawerPaper,
           }}
           onClose={props.handleDrawerToggle}
           ModalProps={{
-            keepMounted: true // Better open performance on mobile.
+            keepMounted: true, // Better open performance on mobile.
           }}
         >
           {brand}

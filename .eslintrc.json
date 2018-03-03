@@ -20,18 +20,17 @@
         "no-unused-vars": "warn",
         "constructor-super": "warn",
         "valid-typeof": "warn",
-        "import/no-extraneous-dependencies": [
-            "error",
-            {
-                "devDependencies": true
-            }
-        ],
+        "comma-dangle": "warn",
+        "linebreak-style": "off",
+        "import/extensions": "off",
+        "import/no-unresolved": "off",
+        "import/no-extraneous-dependencies": "off",
         "quotes": [
             2,
             "single"
         ],
         "semi": [
-            "error",
+            "warn",
             "always"
         ]
     },

@@ -1,14 +1,13 @@
 {
   "name": "material-dashboard-react",
   "description": "Material Dashboard ReactJS theme with Electron",
-  "author": "Motion Software",
+  "author": "Krasen Ilkov",
   "version": "1.0.0",
   "private": true,
   "homepage": "./",
   "main": "electron/electron-starter.js",
   "scripts": {
     "start": "nf start -p 3000",
-    "server": "node ./api/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
@@ -30,16 +29,12 @@
     }
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "body-parser": "^1.18.2",
     "chartist": "^0.10.1",
     "classnames": "^2.2.5",
-    "express": "^4.16.2",
     "material-ui": "1.0.0-beta.30",
     "material-ui-icons": "1.0.0-beta.17",
     "npm-run-all": "^4.1.1",
     "perfect-scrollbar": "^1.3.0",
-    "postinstall": "0.0.1",
     "react": "^16.2.0",
     "react-chartist": "^0.13.1",
     "react-dom": "^16.2.0",
@@ -49,7 +44,7 @@
     "react-swipeable-views": "^0.12.12",
     "sequelize": "^4.33.4",
     "sqlite": "^2.9.1",
-    "sqlite3": "https://github.com/mapbox/node-sqlite3/tarball/master"
+    "sqlite3": "^3.1.13"
   },
   "devDependencies": {
     "devtron": "^1.4.0",
