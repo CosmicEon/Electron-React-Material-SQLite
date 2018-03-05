@@ -16,7 +16,7 @@
     "react-start": "react-scripts start",
     "pack": "build --dir",
     "dist": "npm run build && build",
-    "rebuild-sqlite3": "electron-rebuild -f -w sqlite3",
+    "rebuild": "electron-rebuild -f -w sqlite3",
     "postinstall": "electron-builder install-app-deps"
   },
   "build": {

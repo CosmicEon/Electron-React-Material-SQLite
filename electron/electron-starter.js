@@ -2,7 +2,8 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 // Module to control application life.
 // const app = electron.app
 
-const dataController = require('./data/data-controller');
+const productController = require('./product/controller');
+const requester = require('./requester');
 
 // Module to create native browser window.
 // const BrowserWindow = electron.BrowserWindow
@@ -29,25 +30,40 @@ function createWindow() {
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 
-  // Test DB
+  // Test DB GET
   ipcMain.on('getProductsCall', (event, args) => {
     console.log(event);
 
     // handle the request
-    dataController.getProducts()
+    productController.getProducts()
       .then((results) => {
         mainWindow.webContents.send('getProductsReturn', JSON.stringify(results));
       });
   });
 
+  // Test DB POST
   ipcMain.on('addToProductsCall', (event, args) => {
     console.log(event);
     const itemToAdd = args;
 
     // handle the request
-    dataController.addToProducts(itemToAdd)
+    productController.addToProducts(itemToAdd)
       .then(() => {
-        mainWindow.webContents.send('addToProductsReturn', 'done');
+        // test HTTP.GET and return result to react
+        // const location = requester.getLocation();
+        mainWindow.webContents.send('addToProductsReturn', 'success');
+      });
+  });
+
+  // Test HTTP GET to Google Maps
+  ipcMain.on('getLocationCall', (event) => {
+    console.log(event);
+
+    // handle the request
+    requester.getLocation()
+      .then((result) => {
+        // test HTTP.GET and return result to react
+        mainWindow.webContents.send('getLocationReturn', result);
       });
   });
 

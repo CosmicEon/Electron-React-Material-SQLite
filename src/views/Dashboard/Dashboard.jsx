@@ -40,15 +40,7 @@ const { ipcRenderer } = window.require('electron');
 class Dashboard extends React.Component {
   state = {
     value: 0,
-    // inputName: '',
-  };
-
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
-
-  handleChangeIndex = (index) => {
-    this.setState({ value: index });
+    inputName: '',
   };
 
   getProductsHandler = () => {
@@ -64,34 +56,54 @@ class Dashboard extends React.Component {
     });
   }
 
-  addToProductsHandler = () => {
-    console.log('addToProductsHandler', ipcRenderer);
+  getLocationHandler = () => {
+    console.log('getLocationHandler', ipcRenderer);
 
     // trigger call to electron
-    const price = ((Math.random() * 999) + 1).toFixed(0);
-    const name = 'Huawei P10 ';
-    const objectToSave = {
-      name,
-      price,
-    };
-    console.log(objectToSave);
-    console.log(this.state.inputName);
-    ipcRenderer.send('addToProductsCall', objectToSave);
+    ipcRenderer.send('getLocationCall');
 
     // listen for callback from electron
-    ipcRenderer.on('addToProductsReturn', (event, result) => {
-      console.log('addToProductsReturn', event);
-      console.log('addToProductsReturn', result);
+    ipcRenderer.on('getLocationReturn', (event, result) => {
+      console.log('getLocationReturn', event);
+      console.log('getLocationReturn', result);
     });
   }
 
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
+  handleChangeIndex = (index) => {
+    this.setState({ value: index });
+  };
+
   //  event handler test
-  // handleChange = (event) => {
-  //   if (event.key === 'Enter') {
-  //     console.log('do validate');
-  //     this.setState({ inputName: event.target.value });
-  //   }
-  // }
+  addToProductsHandler = (event) => {
+    if (event.key === 'Enter') {
+      console.log('do validate');
+      console.log(event.target.value);
+      this.setState({ inputName: event.target.value });
+
+      // trigger call to electron
+      const price = Math.floor((Math.random() * (1000 - (500 + 1))) + 500);
+      const name = event.target.value;
+      const objectToSave = {
+        name,
+        price,
+      };
+      console.log(objectToSave);
+      console.log(this.state.inputName);
+      ipcRenderer.send('addToProductsCall', objectToSave);
+
+      // listen for callback from electron
+      ipcRenderer.on('addToProductsReturn', (ev, result) => {
+        console.log('addToProductsReturn', ev);
+        console.log('addToProductsReturn', result);
+      });
+
+      console.log(this.state.inputName);
+    }
+  }
 
   render() {
     return (
@@ -117,18 +129,21 @@ class Dashboard extends React.Component {
           {/* this is test for DB */}
           <ItemGrid xs={12} sm={6} md={3}>
             <StatsCard
-              addToProducts={this.addToProductsHandler}
+              addToProducts={this.getLocationHandler}
               icon={ContentCopy}
               iconColor="orange"
-              title="SQLite"
-              description="POST"
+              title="HTTP GET"
+              description="Google Maps"
               // small="GB"
               statIcon={Warning}
               statIconColor="danger"
-              statLink={{ text: 'Test DB', href: '#pablo' }}
+              statLink={{ text: 'Test the call', href: '#pablo' }}
             />
-            {/* <input type="text" onKeyPress={this.handleChange()} /> */}
 
+            <div>
+              POST Item to Products
+              <input type="text" onKeyPress={event => this.addToProductsHandler(event)} placeholder="Press 'Enter' to save" />
+            </div>
           </ItemGrid>
           {/* this is test for DB */}
 
