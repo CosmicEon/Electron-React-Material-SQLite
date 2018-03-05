@@ -4,19 +4,27 @@
 ## Setup the project
 Problem goes with the package `sqlite3`, which is native and need to be rebuild to be used with electron
 
+
+### Windows only solution
 * Install those packages
 ``` bash
 npm install –g node-gyp
 ```
 ``` bash
-npm install -g windows-build-tools # This package needs to be run from administrator console, also python is required
+npm install -g windows-build-tools  # This package needs to be run
+                                    # from administrator console,
+                                    # python also is required
 ```
 
-* Run this command to rebuild `sqlite3`
+* Now rebuild the `sqlite3` package
 ``` bash
 npm run rebuild
 ```
 If there are no errors, the project can be started
+
+
+### Linux or UNIX
+For Linux or UNIX based systems there is similar approach, but search for it.
 
 
 ## Commands to use
