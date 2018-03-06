@@ -34,8 +34,8 @@ import {
 import dashboardStyle from 'variables/styles/dashboardStyle';
 
 // test db
-// import axios from 'axios';
-const { ipcRenderer } = window.require('electron');
+import axios from 'axios';
+// const { ipcRenderer } = window.require('electron');
 
 class Dashboard extends React.Component {
   state = {
@@ -44,29 +44,38 @@ class Dashboard extends React.Component {
   };
 
   getProductsHandler = () => {
-    console.log('getProductsHandler', ipcRenderer);
+    // HTTP call to api
+    axios.get('http://localhost:3200/todos')
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
 
-    // trigger call to electron
-    ipcRenderer.send('getProductsCall');
+    // console.log('getProductsHandler', ipcRenderer);
 
-    // listen for callback from electron
-    ipcRenderer.on('getProductsReturn', (event, result) => {
-      console.log('getProductsReturn', event);
-      console.log('getProductsReturn', result);
-    });
+    // // trigger call to electron
+    // ipcRenderer.send('getProductsCall');
+
+    // // listen for callback from electron
+    // ipcRenderer.on('getProductsReturn', (event, result) => {
+    //   console.log('getProductsReturn', event);
+    //   console.log('getProductsReturn', result);
+    // });
   }
 
   getLocationHandler = () => {
-    console.log('getLocationHandler', ipcRenderer);
+    // console.log('getLocationHandler', ipcRenderer);
 
-    // trigger call to electron
-    ipcRenderer.send('getLocationCall');
+    // // trigger call to electron
+    // ipcRenderer.send('getLocationCall');
 
-    // listen for callback from electron
-    ipcRenderer.on('getLocationReturn', (event, result) => {
-      console.log('getLocationReturn', event);
-      console.log('getLocationReturn', result);
-    });
+    // // listen for callback from electron
+    // ipcRenderer.on('getLocationReturn', (event, result) => {
+    //   console.log('getLocationReturn', event);
+    //   console.log('getLocationReturn', result);
+    // });
   }
 
   handleChange = (event, value) => {
@@ -79,30 +88,30 @@ class Dashboard extends React.Component {
 
   //  event handler test
   addToProductsHandler = (event) => {
-    if (event.key === 'Enter') {
-      console.log('do validate');
-      console.log(event.target.value);
-      this.setState({ inputName: event.target.value });
+    // if (event.key === 'Enter') {
+    //   console.log('do validate');
+    //   console.log(event.target.value);
+    //   this.setState({ inputName: event.target.value });
 
-      // trigger call to electron
-      const price = Math.floor((Math.random() * (1000 - (500 + 1))) + 500);
-      const name = event.target.value;
-      const objectToSave = {
-        name,
-        price,
-      };
-      console.log(objectToSave);
-      console.log(this.state.inputName);
-      ipcRenderer.send('addToProductsCall', objectToSave);
+    //   // trigger call to electron
+    //   const price = Math.floor((Math.random() * (1000 - (500 + 1))) + 500);
+    //   const name = event.target.value;
+    //   const objectToSave = {
+    //     name,
+    //     price,
+    //   };
+    //   console.log(objectToSave);
+    //   console.log(this.state.inputName);
+    //   ipcRenderer.send('addToProductsCall', objectToSave);
 
-      // listen for callback from electron
-      ipcRenderer.on('addToProductsReturn', (ev, result) => {
-        console.log('addToProductsReturn', ev);
-        console.log('addToProductsReturn', result);
-      });
+    //   // listen for callback from electron
+    //   ipcRenderer.on('addToProductsReturn', (ev, result) => {
+    //     console.log('addToProductsReturn', ev);
+    //     console.log('addToProductsReturn', result);
+    //   });
 
-      console.log(this.state.inputName);
-    }
+    //   console.log(this.state.inputName);
+    // }
   }
 
   render() {
